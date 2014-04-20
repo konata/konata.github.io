@@ -1,1 +1,0 @@
-{latest_version:"0.9",url:"market://details?id=cn.beriru.animechord"}
