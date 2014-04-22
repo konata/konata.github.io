@@ -239,38 +239,67 @@
 		});
 
 		win.$ = function(){
-			return document.querySelectorAll.apply(document,arguments);
+			return doc.querySelectorAll.bind(doc).apply(null,arguments);
 		};
 
-		var animechordCandidates = "index tracks setting intro".split(/\s+/).map(function(name){
-			return "../images/screenshot/animechord/" + name + ".jpg";
-		});
+    var Fade = function(cfg){
+      this.counter = 0;
+      "duration image candidate prefix interval".split(/\s+/).map(function(name){
+        this[name] = cfg[name];
+      }.bind(this));
+    };
 
-		var dailyinsistCandidates = "create list status succ setting".split(/\s+/).map(function(name){
-			return "../images/screenshot/dailyinsist/" + name + ".jpg";
-		});
+    Fade.prototype = {
+      fade:function(){
+        this.timer = setInterval(function(){
+          this.counter += 50;
+          var remain = (this.counter % this.duration);
+          if(remain < this.interval){
+            var idx = parseInt(this.counter / this.duration);
+            var alpha = remain / this.interval;
+            this.name = this.candidate[idx % this.candidate.length];
+            this.image.style.opacity = alpha;
+            this.image.src = this.path();
+          }
+          if(remain > this.duration - this.interval){
+            var idx = parseInt(this.counter / this.duration);
+            var alpha = (idx + 1) * this.duration - this.counter;
+            this.name = this.candidate[idx % this.candidate.length];
+            this.image.style.opacity = alpha;
+            this.image.src = this.path();
+          }
+        }.bind(this),50);
+      },
 
-		win.onload = function(){
-			var imgList = $(".preview_image");
-			var animechordImg = imgList[0];
-			var dailyinsistImg = imgList[1];
+      stop:function(){
+        clearInterval(this.timer);
+      },
 
-			var animechordIdx = 0;
-			var dailyinsistIdx = 0;
+      path:function(){
+        return "../images/screenshot/" + this.prefix + "/" + this.name +".jpg";
+      }
+    };
 
+    win.onload = function(){
+      var chordCfg = {
+        duration:4000,
+        prefix:"animechord",
+        interval:500,
+        image:$(".preview_image")[0],
+        candidate:"index tracks setting intro".split(/\s+/)
+      };
 
-			setInterval(function(){
-				dailyinsistIdx++;
-				dailyinsistIdx = dailyinsistIdx % dailyinsistCandidates.length;
-				dailyinsistImg.src = dailyinsistCandidates[dailyinsistIdx]; 
-			},3000);
+      var dailyCfg ={
+        duration:4000,
+        prefix:"dailyinsist",
+        interval:500,
+        image:$(".preview_image")[1],
+        candidate:"create list status succ setting".split(/\s+/)
+      };
+      new Fade(chordCfg).fade();
+      new Fade(dailyCfg).fade();
+    }
 
-			setInterval(function(){
-				animechordIdx++;
-				animechordIdx = animechordIdx % animechordCandidates.length;
-				animechordImg.src = animechordCandidates[animechordIdx]; 
-			},4000);
-		}
 	})(window,document);
 
 </script>
