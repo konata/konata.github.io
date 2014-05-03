@@ -3,7 +3,11 @@
   	<meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Minami Apps</title>
-	<link rel="stylesheet" href="/assets/css/font.css" type="text/css" />
+	<link rel="stylesheet" href="../assets/css/font.css" type="text/css" />
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/js/slider.js"></script>
+
 </head>
 	<style type="text/css">
 		body{
@@ -76,15 +80,21 @@
 		}
 		.preview{
 			background: url(../images/case.png);
-			background-size: 240px 438px;
+			background-size: 240px 430px;
 			overflow: hidden;
 			width: 240px;
 			height: 458px;
 			background-repeat: no-repeat;
+			position: relative;
+		}
+		.showcase {
+			width: 1200px;
+			overflow: hidden;
 		}
 		.showcase img{
 			width: 224px;
-			height: 335;
+			display: inline;
+			height: 350px;
 			border-radius:4px;
 		}
 
@@ -100,6 +110,7 @@
 		.showcase li{
 			display: inline;
 			overflow: hidden;
+			margin-right: 5px;
 		}
 
 		.header{
@@ -180,6 +191,9 @@
 				<div class="preview">	
 					<ol class="showcase">
 						<li> <img src="../images/screenshot/animechord/index.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/animechord/tracks.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/animechord/setting.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/animechord/intro.jpg" class="preview_image"/> </li> 
 					</ol>
 				</div>
 			</div>
@@ -217,7 +231,11 @@
 			<div class="col4 col">
 				<div class="preview">	
 					<ol class="showcase">
+						<li> <img src="../images/screenshot/dailyinsist/create.jpg" class="preview_image"/> </li> 
 						<li> <img src="../images/screenshot/dailyinsist/list.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailyinsist/status.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailyinsist/succ.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailyinsist/setting.jpg" class="preview_image"/> </li> 
 					</ol>
 				</div>
 			</div>
@@ -281,6 +299,8 @@
     };
 
     win.onload = function(){
+
+      /** version one translate item using alpha, not that fatasy
       var chordCfg = {
         duration:4000,
         prefix:"animechord",
@@ -296,8 +316,10 @@
         image:$(".preview_image")[1],
         candidate:"create list status succ setting".split(/\s+/)
       };
+
       new Fade(chordCfg).fade();
       new Fade(dailyCfg).fade();
+      */
     }
 
 	})(window,document);
