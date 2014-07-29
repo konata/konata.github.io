@@ -170,6 +170,50 @@
 		<div class="wrapper" >
 			<div class="col3 col">	
 				<div id="logo_img">
+					<img src="../images/dailysaving.png" class="icon">
+					<ul>
+						<li>version: 1.0</li>
+						<li>update: 2014/7/29</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="col6 col">
+				<h3>DailySaving</h3>
+				<p>让你的每一分钱都有迹可循</p>
+				<h4>Features:</h4>
+                <ul>
+                    <li>1.分类功能，让每一笔开销更加精确</li>
+                    <li>2.智能的记录时间，你只需要简单的添加描述即可</li>
+                    <li>3.智能添加分类，让app更懂你</li>
+                    <li>4.按分类查看每日支出，精美的动态统计图</li>
+                    <li>5.按月份查看每月总额消耗和分类比例，让你知道自己花钱的盲点在哪里</li>
+                    <li>6.完全适应smartbar</li>
+				</ul>	
+
+				<h4>二维码下载:</h4>
+				<img class="qrcode" src="../images/qrcode/dailysaving.png"></img>
+
+			</div>
+			<div class="col4 col">
+				<div class="preview">	
+					<ol class="showcase daily">
+						<li> <img src="../images/screenshot/dailysaving/index.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailysaving/create_trans.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailysaving/daily_stat.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailysaving/monthly_stat.jpg" class="preview_image"/> </li> 
+                        <li> <img src="../images/screenshot/dailysaving/daily_stat.jpg" class="preview_image"/> </li> 
+                        <li> <img src="../images/screenshot/dailysaving/create_category.jpg" class="preview_image"/> </li> 
+					</ol>
+				</div>
+			</div>
+		</div>
+
+		<div class="sep">
+		</div>
+
+		<div class="wrapper" >
+			<div class="col3 col">	
+				<div id="logo_img">
 					<img src="../images/ostshuffle.png" class="icon">
 					<ul>
 						<li>version: 1.0</li>
@@ -247,51 +291,6 @@
 			</div>
 		</div>
 
-		<div class="sep">
-		</div>
-
-		<div class="wrapper" >
-			<div class="col3 col">	
-				<div id="logo_img">
-					<img src="../images/dailysaving.png" class="icon">
-					<ul>
-						<li>version: 1.0</li>
-						<li>update: 2014/7/29</li>
-					</ul>
-				</div>	
-			</div>
-			<div class="col6 col">
-				<h3>DailySaving</h3>
-				<p>让你的每一分钱都有迹可循</p>
-				<h4>Features:</h4>
-                <ul>
-                    <li>1.分类功能，让每一笔开销更加精确</li>
-                    <li>2.智能的记录时间，你只需要简单的添加描述即可</li>
-                    <li>3.智能添加分类，让app更懂你</li>
-                    <li>4.按分类查看每日支出，精美的动态统计图</li>
-                    <li>5.按月份查看每月总额消耗和分类比例，让你知道自己花钱的盲点在哪里</li>
-                    <li>6.完全适应smartbar</li>
-				</ul>	
-
-				<h4>二维码下载:</h4>
-				<img class="qrcode" src="../images/qrcode/dailysaving.png"></img>
-
-			</div>
-			<div class="col4 col">
-				<div class="preview">	
-					<ol class="showcase daily">
-						<li> <img src="../images/screenshot/dailysaving/index.jpg" class="preview_image"/> </li> 
-						<li> <img src="../images/screenshot/dailysaving/create_trans.jpg" class="preview_image"/> </li> 
-						<li> <img src="../images/screenshot/dailysaving/daily_stat.jpg" class="preview_image"/> </li> 
-						<li> <img src="../images/screenshot/dailysaving/monthly_stat.jpg" class="preview_image"/> </li> 
-                        <li> <img src="../images/screenshot/dailysaving/daily_stat.jpg" class="preview_image"/> </li> 
-                        <li> <img src="../images/screenshot/dailysaving/create_category.jpg" class="preview_image"/> </li> 
-					</ol>
-				</div>
-			</div>
-		</div>
-
-
     <div class="footer">
       <div class="wrapper">
         <p><a href="mailto:konata@vip.qq.com" class="support">Support</a> | <a href="http://konata.github.io">About</a></p>
@@ -311,7 +310,7 @@
 		};
 
 		jQuery(function(){
-			var chord = jQuery(".showcase:nth(0)");
+			var chord = jQuery(".showcase:nth(1)");
 			var span = [0,232,464,696];
 			var n = 0;
 			setInterval(function(){
@@ -320,23 +319,24 @@
 				n++;
 			},3500);
 
-			var daily = jQuery(".showcase:nth(1)");
+			var daily = jQuery(".showcase:nth(2)");
 			var dailyspan = [1,233,465,697,929];
 			var dailyn = 0;
 			setInterval(function(){
 				var left = 0 - dailyspan[dailyn%dailyspan.length];
 				daily.animate({left:"" + left + "px"});
 				dailyn++;
-            },3000);
+     },3000);
             
-            var saving = jQuery(".showcase:nth(2)");
+      var saving = jQuery(".showcase:nth(0)");
  			var savingspan = [1,233,465,697,929,1161];
 			var savingn = 0;
 			setInterval(function(){
 				var left = 0 - savingspan[savingn%savingspan.length];
 				saving.animate({left:"" + left + "px"});
 				savingn++;
-            },3000);
+     },2500);
+
 		});
 	})(window,document);
 </script>
