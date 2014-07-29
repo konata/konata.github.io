@@ -247,6 +247,50 @@
 			</div>
 		</div>
 
+		<div class="sep">
+		</div>
+
+		<div class="wrapper" >
+			<div class="col3 col">	
+				<div id="logo_img">
+					<img src="../images/todo.jpg" class="icon">
+					<ul>
+						<li>version: 1.0</li>
+						<li>update: 2014/7/29</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="col6 col">
+				<h3>DailySaving</h3>
+				<p>让你的每一分钱都有迹可循</p>
+				<h4>Features:</h4>
+                <ul>
+                    <li>1.分类功能，让每一笔开销更加精确</li>
+                    <li>2.智能的记录时间，你只需要简单的添加描述即可</li>
+                    <li>3.智能添加分类，让app更懂你</li>
+                    <li>4.按分类查看每日支出，精美的动态统计图</li>
+                    <li>5.按月份查看每月总额消耗和分类比例，让你知道自己花钱的盲点在哪里</li>
+                    <li>6.完全适应smartbar</li>
+				</ul>	
+
+				<h4>二维码下载:</h4>
+				<img class="qrcode" src="../images/qrcode/dailysaving.png"></img>
+
+			</div>
+			<div class="col4 col">
+				<div class="preview">	
+					<ol class="showcase daily">
+						<li> <img src="../images/screenshot/dailysaving/index.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailysaving/create_trans.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailysaving/daily_stat.jpg" class="preview_image"/> </li> 
+						<li> <img src="../images/screenshot/dailysaving/monthly_stat.jpg" class="preview_image"/> </li> 
+                        <li> <img src="../images/screenshot/dailysaving/daily_stat.jpg" class="preview_image"/> </li> 
+                        <li> <img src="../images/screenshot/dailysaving/create_category.jpg" class="preview_image"/> </li> 
+					</ol>
+				</div>
+			</div>
+		</div>
+
 
     <div class="footer">
       <div class="wrapper">
@@ -266,71 +310,6 @@
 			return doc.querySelectorAll.bind(doc).apply(null,arguments);
 		};
 
-	 	// version one translate item using alpha, not that fatasy
-		/*
-	    var Fade = function(cfg){
-	      this.counter = 0;
-	      "duration image candidate prefix interval".split(/\s+/).map(function(name){
-	        this[name] = cfg[name];
-	      }.bind(this));
-	    };
-
-	    Fade.prototype = {
-	      fade:function(){
-	        this.timer = setInterval(function(){
-	          this.counter += 50;
-	          var remain = (this.counter % this.duration);
-	          if(remain < this.interval){
-	            var idx = parseInt(this.counter / this.duration);
-	            var alpha = remain / this.interval;
-	            this.name = this.candidate[idx % this.candidate.length];
-	            this.image.style.opacity = alpha;
-	            this.image.src = this.path();
-	          }
-	          if(remain > this.duration - this.interval){
-	            var idx = parseInt(this.counter / this.duration);
-	            var alpha = (idx + 1) * this.duration - this.counter;
-	            this.name = this.candidate[idx % this.candidate.length];
-	            this.image.style.opacity = alpha;
-	            this.image.src = this.path();
-	          }
-	        }.bind(this),50);
-	      },
-
-	      stop:function(){
-	        clearInterval(this.timer);
-	      },
-
-	      path:function(){
-	        return "../images/screenshot/" + this.prefix + "/" + this.name +".jpg";
-	      }
-	    };
-
-
-
-	    win.onload = function(){
-	      var chordCfg = {
-	        duration:4000,
-	        prefix:"animechord",
-	        interval:500,
-	        image:$(".preview_image")[0],
-	        candidate:"index tracks setting intro".split(/\s+/)
-	      };
-
-	      var dailyCfg ={
-	        duration:4000,
-	        prefix:"dailyinsist",
-	        interval:500,
-	        image:$(".preview_image")[1],
-	        candidate:"create list status succ setting".split(/\s+/)
-	      };
-
-	      new Fade(chordCfg).fade();
-	      new Fade(dailyCfg).fade();
-	    }
-		*/
-
-
 		jQuery(function(){
 			var chord = jQuery(".showcase:nth(0)");
 			var span = [0,232,464,696];
@@ -348,13 +327,18 @@
 				var left = 0 - dailyspan[dailyn%dailyspan.length];
 				daily.animate({left:"" + left + "px"});
 				dailyn++;
-			},3000);
-
+            },3000);
+            
+            var saving = jQuery(".showcase:nth(2)");
+ 			var savingspan = [1,233,465,697,929,1161];
+			var savingn = 0;
+			setInterval(function(){
+				var left = 0 - savingspan[savingn%savingspan.length];
+				saving({left:"" + left + "px"});
+				savingn++;
+            },3000);
 		});
-
 	})(window,document);
-
-
 </script>
 </html>
 
