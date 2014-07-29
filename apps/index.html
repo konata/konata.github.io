@@ -334,7 +334,7 @@
 			var savingn = 0;
 			setInterval(function(){
 				var left = 0 - savingspan[savingn%savingspan.length];
-				saving({left:"" + left + "px"});
+				saving.animate({left:"" + left + "px"});
 				savingn++;
             },3000);
 		});
