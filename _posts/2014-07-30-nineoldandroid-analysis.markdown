@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "NineOldAndroid 原理分析"
+title:  "NineOldAndroids 原理分析"
 date:   2014-07-30 01:06:25
 categories: Mobile
 ---
 
-### NineOldAndroid 原理分析
+### NineOldAndroids 原理分析
 
 在NineOldAndroids中提供了一系列方法设置属性和做Animator兼容的动画,我们以设置属性(scaleX)为例,分析整个过程
 
@@ -185,7 +185,7 @@ mScaleX = scaleX;
 而默认的scaleX是1，也就是我们刚才做的整个过程中mScale为之前设置的数值或者默认值1，还没有使用我们新设置的scaleX，现在我们的transformMatrix做完了，继续看代码
 
 {% highlight java %}
-	private void computeRect(final RectF r, View view) {
+private void computeRect(final RectF r, View view) {
 	// compute current rectangle according to matrix transformation
 	final float w = view.getWidth();
 	final float h = view.getHeight();
