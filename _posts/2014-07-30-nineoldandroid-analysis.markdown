@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "NineOldAndroid 原理分析"
+date:   2017-07-30 01:06:25
+categories: Mobile
+---
+
 ### NineOldAndroid 原理分析
 
 在NineOldAndroids中提供了一系列方法设置属性和做Animator兼容的动画,我们以设置属性(scaleX)为例,分析整个过程
