@@ -1,9 +1,10 @@
 name: Solar Theme
 url: http://example.org
-description: Animation | Commic | Web | Mobile
+description: (Anime|Comic|Web|Mobile)+
 
 permalink: /:year/:month/:day/:title/
 paginate: 10
 pygments: true
+markdown: kramdown
 
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
