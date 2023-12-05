@@ -3,46 +3,45 @@
 # Import the theme
 theme: jekyll-theme-chirpy
 
+# Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
+# and doesn't have a custom domain.
+baseurl: ''
+
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
 lang: en
 
-# Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
-timezone:
+# Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
+timezone: 'Asia/Shanghai'
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: 甜皮鸭实力代购 # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
+tagline: 納めましょう妄想税 # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
 
-# Fill in the protocol & hostname for your site.
-# e.g. 'https://username.github.io', note that it does not end with a '/'.
-url: ""
+# fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
+url: 'https://lolicon.github.io'
 
 github:
-  username: github_username # change to your github username
+  username: lolicon # change to your github username
 
 twitter:
-  username: twitter_username # change to your twitter username
+  username: minamikazecafe # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: natsuki
+  email: minamikazecafe@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
-    - https://github.com/username # change to your github homepage
-    # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://twitter.com/minamikazecafe # change to your twitter homepage
+    - https://github.com/lolicon # change to your github homepage
 
 google_site_verification: # fill in to your verification string
 
@@ -50,7 +49,7 @@ google_site_verification: # fill in to your verification string
 # The end of `jekyll-seo-tag` settings
 
 google_analytics:
-  id: # fill in your Google Analytics ID
+  id: G-C4HBSST5PK
 
 # Prefer color scheme setting.
 #
@@ -63,7 +62,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode: # [light|dark]
+theme_mode: light
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -73,7 +72,7 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://avatars.githubusercontent.com/u/227627?v=4
 
 # boolean type, the global switch for TOC in posts.
 toc: true
@@ -111,9 +110,6 @@ pwa:
 
 paginate: 10
 
-# The base URL of your site
-baseurl: ""
-
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
@@ -134,7 +130,7 @@ collections:
 
 defaults:
   - scope:
-      path: "" # An empty string here means all files in the project
+      path: '' # An empty string here means all files in the project
       type: posts
     values:
       layout: post
@@ -148,7 +144,7 @@ defaults:
     values:
       comments: false
   - scope:
-      path: ""
+      path: ''
       type: tabs # see `site.collections`
     values:
       layout: page
@@ -175,13 +171,14 @@ compress_html:
     envs: [development]
 
 exclude:
-  - "*.gem"
-  - "*.gemspec"
-  - docs
+  - '*.gem'
+  - '*.gemspec'
   - tools
   - README.md
+  - CHANGELOG.md
   - LICENSE
   - rollup.config.js
+  - node_modules
   - package*.json
 
 jekyll-archives:
