@@ -25,10 +25,10 @@ tagline: 納めましょう妄想税 # it will display as the sub-title
 description: >- # used by seo meta and the atom feed
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://lolicon.github.io'
+url: 'https://konata.github.io'
 
 github:
-  username: lolicon # change to your github username
+  username: konata # change to your github username
 
 twitter:
   username: minamikazecafe # change to your twitter username
@@ -41,7 +41,7 @@ social:
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/minamikazecafe # change to your twitter homepage
-    - https://github.com/lolicon # change to your github homepage
+    - https://github.com/konata # change to your github homepage
 
 google_site_verification: # fill in to your verification string
 
