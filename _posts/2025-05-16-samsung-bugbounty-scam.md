@@ -1,7 +1,8 @@
 ---
 layout: post
-title: 'Samsung’s ISVP: Betraying the Trust of Security Researchers"Security Researchers'
+title: 'Samsung’s ISVP: Betraying the Trust of Security Researchers'
 published: true
+date: 2025-05-16
 ---
 
 As a security researcher passionate about improving mobile security, I’ve had two distinct experiences with Samsung’s security bug bounty program in 2024 and 2025. Unfortunately, both encounters left me frustrated due to **slow responses**, **lack of communication**, **opaque processes**, and **inconsistent reward evaluations**. This post details my journey, with the hope of shedding light on areas where Samsung’s program could improve to better support the security research community.
@@ -17,7 +18,8 @@ In 2024, I discovered and reported three high-severity launch anywhere vulnerabi
 - Zero Communication:
 
   Despite reaching out via email and Samsung’s official reporting platform, I received no responses to any of my queries. It felt like shouting into a void.
-  ![samsung-no-human-response-2024.png](/assets/images/samsung-isvp/samsung-no-human-response-2024.png.png)
+
+> ![samsung-no-human-response-2024.png](/assets/images/samsung-isvp/samsung-no-human-response-2024.png.png)
 
 - Opaque Standards:
 
@@ -62,9 +64,9 @@ Here’s Samsung’s [public disclosure](https://security.samsungmobile.com/serv
 
 When I reached out to inquire about the moderate rating and the reward decision, I was met with the same silence as before. No explanation, no dialogue, just a final decision handed down without justification.
 
-![communication-via-email](/assets/images/samsung-isvp/communication-via-email.png)
+> ![communication-via-email](/assets/images/samsung-isvp/communication-via-email.png)
 
-![communication-via-portal](/assets/images/samsung-isvp/samsung-no-human-response-2025.png)
+> ![communication-via-portal](/assets/images/samsung-isvp/samsung-no-human-response-2025.png)
 
 ## A Pattern of Disappointment
 
