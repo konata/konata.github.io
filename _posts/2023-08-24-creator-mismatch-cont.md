@@ -107,7 +107,7 @@ public @Nullable String resolveType(@NonNull ContentResolver resolver) {
 
 看一下效果
 
-![Alt text](/assets/images/tasks-before.png)
+![Alt text](/assets/images/creator-mismatch-cont/tasks-before.png)
 
-![Alt text](/assets/images/tasks-after.png)
+![Alt text](/assets/images/creator-mismatch-cont/tasks-after.png)
 

@@ -10,15 +10,15 @@ Backing to 2015, Google introduced the [MediaProjectionManager](https://develope
 
 - SystemUI displays a confirm dialog to warn user while initiating the cast recording session,
 
-![confirm dialog](/assets/images/confirm-dialog.jpg)
+![confirm dialog](/assets/images/screen-cast/confirm-dialog.jpg)
 
 - a casting indicator is always on the StatusBar to notify user that they are been watched,
 
-![cast indicator](/assets/images/indicator.jpg)
+![cast indicator](/assets/images/screen-cast/indicator.jpg)
 
 - a togglable Screen Cast Tile would show up in the Quick Settings panel, along with its current status and the name of the casting application, clicking the tile leads SystemUI to immediately terminate the casting sessions
 
-![quick setting tiles](/assets/images/tile.jpg)
+![quick setting tiles](/assets/images/screen-cast/tile.jpg)
 
 Assuming that an application called `CaptureCat` is going to implement screen casting functionality, the following is an overview of the process.
 

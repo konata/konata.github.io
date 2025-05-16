@@ -140,7 +140,7 @@ AIDL 做代码生成时, 对于 Parcelable 类型的参数，因为类型是编�
 
 > 以下是 AIDL 声明为 `foo(A, B)`, 实际调用为 `foo(A', B)` 的序列化示意图
 
-![Mismatch](/assets/images/mismatch.png)
+![Mismatch](/assets/images/creator-mismatch/mismatch.png)
 
 SDK 中存在两个 Intent 的子类，`ReferrerIntent` 和 `LabeledIntent` ，其实现都是先写入了父类 `Intent` 的所有字段，然后添加了自己的私有字段, 如果用这两个类型作为 Intent 的参数，那么 startActivity 调用中位于 Intent 位置后的参数我们就都可以污染
 
@@ -153,21 +153,21 @@ SDK 中存在两个 Intent 的子类，`ReferrerIntent` 和 `LabeledIntent` ，�
 - 如果 bytes 是 null, 写入 i32 的 -1,
 - 否则按照 i32 写入 bytes 的长度,然后写入 bytes 的所有内容, 之后需要对内容做四字节对齐, 需要补齐的一到三个字节全部补 0x00
 
-![Alt text](/assets/images/bytearray.png)
+![Alt text](/assets/images/creator-mismatch/bytearray.png)
 
 ### Parcel.writeString8(str)
 
 - 如果 str 是 null, 写入 i32 的 -1,
 - 否则按照 i32 写入 str 的长度, 然后依次写入每个字符, 再添加 \0 作为结尾, 最后按照 4 字节对齐, 需要补充的一到三个字符全部补 0x00
 
-![Alt text](/assets/images/string8.png)
+![Alt text](/assets/images/creator-mismatch/string8.png)
 
 ### Parcel.writeString16(str)
 
 - 如果 str 是 null, 写入 i32 的 -1,
 - 否则按照 i32 写入字符串长度, 然后按照 char16_t 写入每个字符, 最后添加 0x0000 作为结尾, 整个按照 4 字节对齐, 如需要补齐, 再补 0x0000
 
-![Alt text](/assets/images/string16.png)
+![Alt text](/assets/images/creator-mismatch/string16.png)
 
 ### Parcel.writeStrongBinder(binder)
 
@@ -188,7 +188,7 @@ struct flat_binder_object {
 如果读入的时候如果出现错误,
 比如 hdr 字段读出来不是预设的两个值(`BINDER_TYPE_BINDER` | `BINDER_TYPE_HANDLER`), 或者该区间数据在 Parcel.mObjects 中没有被记录为一个 Binder 等, 则上层拿到的 binder 是 null, 且此时不会继续调用 [finishUnflattenBinder](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/Parcel.cpp;drc=397dd78fcdcfed36ee62302e2b90712e2d784364;l=188), 所以不会继续读 stability 字段, 此时仅消耗了 24 个字节,
 
-![Alt text](/assets/images/binder.png)
+![Alt text](/assets/images/creator-mismatch/binder.png)
 
 如上图, 我们在将一个正常的 Binder 写入后, 将 dataPosition 设置为 binder 之前的位置. 然后连续 7 次调用 readInt 方法来读取刚刚写入的 28 个字节对应的 mData. 此时前 24 个字节本应是 binder. 然而如果使用了 readInplace、readAligned 或 read 等方法(readInt 间接调用了 readInplace) 来读取对应的 mData，将会触发 [validateReadData](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/Parcel.cpp;drc=418914a7c54f4aa0418b6ddbb5096b66286cd80e;l=1722) 的检查逻辑. 该逻辑通过查看 Parcel 的 mObjects 记录确定读取的区域是否是 binder. 如果是的话校验将无法通过，返回 0. 最后四个字节是 stability，可以正常读取。
 
@@ -199,7 +199,7 @@ struct flat_binder_object {
 - 如果是 null, 写入 i32 的 0
 - 否则写入 i32 的 1, 并按照对应 Parcelable 子类的实现依次写入其他内容
 
-![Alt text](/assets/images/user-handle.png)
+![Alt text](/assets/images/creator-mismatch/user-handle.png)
 
 ### Parcel.writeTypedObject(bundleOf(...))
 
@@ -216,7 +216,7 @@ Bundle 本身只是 Parcelable 的一种实现而已, 但是因为太常用, 这
   6. 按照 value 的运行时类型, 写入 value 的序列化内容
   7. 重复 4,5,6 直到写完所有的 entry
 
-  ![Alt text](/assets/images/bundle.png)
+  ![Alt text](/assets/images/creator-mismatch/bundle.png)
 
   上图的前四个字节是按照 TypedObject 写入的 i32 的 1
 
