@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Samsung’s ISVP: Betraying the Trust of Security Researchers'
+title: 'Samsung’s ISVP: Betraying the trust of security researchers'
 published: true
 date: 2025-05-16
 ---
@@ -13,7 +13,7 @@ In 2024, I discovered and reported three high-severity launch anywhere vulnerabi
 
 - Slow Response Times:
 
-  The process dragged on for nearly nine months (2024-01-16 to 2023-09-04), with no clear timeline provided.
+  The process dragged on for nearly nine months (2024-01-16 to 2024-09-04), with no clear timeline provided.
 
 - Zero Communication:
 
@@ -29,7 +29,7 @@ Frustrated by the low rewards and lack of engagement, I decided to pause my effo
 
 ## 2025: A glimmer of hope with ISVP, but disappointment persists
 
-In 2025, I came across Samsung’s [Important Scenario Vulnerability Program](https://security.samsungmobile.com/securityPostDetail.smsb/189) (ISVP), announced on their security portal (Samsung Mobile Security). The ISVP promised improvements, specifically addressing the issues I had faced in 2023. Two aspects of the program caught my attention:
+In 2025, I came across Samsung’s [Important Scenario Vulnerability Program](https://security.samsungmobile.com/securityPostDetail.smsb/189) (ISVP), announced on their security portal (Samsung Mobile Security). The ISVP promised improvements, specifically addressing the issues I had faced in 2024. Two aspects of the program caught my attention:
 
 - Clear Scenarios and Conditions:
 
