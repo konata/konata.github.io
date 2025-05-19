@@ -80,22 +80,37 @@ with(packageManager.packageInstaller) {
             session.fsync(to)
         }
     }
-    session.commit(IntentSender(object : IIntentSender.Stub() {
+    session.commit(IntentSender(object : IIntentSender.Stub() { // 1
         override fun send(code: Int, intent: Intent, resolvedType: String?, whitelistToken: IBinder?, finishedReceiver: IIntentReceiver?, requiredPermission: String?, options: Bundle?) {
-            intent.extras?.getParcelable(Intent.EXTRA_INTENT, Intent::class.java)?.let(::startActivity)
+            intent.extras?.getParcelable(Intent.EXTRA_INTENT, Intent::class.java)?.let(::startActivity) // 2
         }
     }))
 }
 ```
 
-This code creates a session, writes the apk content, and commits the session. Once commit is called, the PackageInstallerSession workflow begins.
+This code initiates a session, writes the APK content, and commits the session. Once `commit` is called, the `PackageInstallerSession` workflow starts.
 
-- PackageInstallerSession dispatch `MSG_ON_SESSION_SEALED`, `MSG_STREAM_VALIDATE_AND_COMMIT`, `MSG_INSTALL` sequentially, one after the previous is done, 
-when [`handleInstall`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/PackageInstallerSession.java;l=2845) is called (the callback of message `MSG_INSTALL`) the installation is suspended if the session for the installation needs user confirmation which is calculated in [`computeUserActionRequirement`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/PackageInstallerSession.java;l=1035) the result 
+- `commit`
+  `PackageInstallerSession` dispatches `MSG_ON_SESSION_SEALED`, `MSG_STREAM_VALIDATE_AND_COMMIT`, and `MSG_INSTALL` sequentially, each following the completion of the previous step.
 
+  - `MSG_INSTALL`
+    When `MSG_INSTALL` is sent, the [`handleInstall`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/PackageInstallerSession.java;l=2845) method is invoked. This method calls `sendPendingUserActionIntentIfNeeded` to determine if user approval is required.
+    - `sendPendingUserActionIntentIfNeeded`
+      Invokes `checkUserActionRequirement` to evaluate the need for user action.
+      - `checkUserActionRequirement`
+        Uses `computeUserActionRequirement` to calculate the user action requirement. For non-privileged apps, the result is typically `USER_ACTION_REQUIRED`, triggering the `IntentSender` to be sent with additional extras, including:
+        - `Intent.EXTRA_INTENT`: The intent the client app must invoke for user action, always pointing to `PackageInstaller` with the action `ACTION_CONFIRM_PRE_APPROVAL`.
+        - `EXTRA_SESSION_ID`: The current session ID.
+        - `EXTRA_STATUS`: Indicates that the installation is suspended, awaiting user action.
 
+  At this point, the installation process is paused (archived by record state and return, which is somewhat like CoroutineContext), and the `IntentSender` provided by the client app is triggered. The client app is expected to handle the filled intent to trigger the user action intent.
+
+-
+
+when [`handleInstall`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/PackageInstallerSession.java;l=2845) is called (the callback of message `MSG_INSTALL`) the installation is suspended if the session for the installation needs user confirmation which is calculated in [`computeUserActionRequirement`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/PackageInstallerSession.java;l=1035) the result
 
 =======
+
 ## Sideloading
 
 there are two approaches to request application install in android, `PIA` and `Session-based Installation`, the name is not formal but actively used in the AOSP code base,
