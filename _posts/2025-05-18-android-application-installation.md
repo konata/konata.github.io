@@ -1,17 +1,17 @@
 ---
 layout: post
-title: 'Android application installation under the hood'
+title: 'Android’s Install Flow: A Treasure Map for Exploit Crafters'
 published: true
 date: 2025-05-20
 ---
 
-In my previous post, [Samsung’s ISVP: Betraying the Trust of Security Researchers](/posts/samsung-bugbounty-scam), I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the [`android.permission.INSTALL_PACKAGES`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/res/AndroidManifest.xml;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=6054) signature permission, permitting app installations without user consent.
+In my previous post, [Samsung’s ISVP: Betraying the Trust of Security Researchers](/posts/samsung-bugbounty-scam), I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the [`android.permission.INSTALL_PACKAGES`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/res/AndroidManifest.xml;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=6054) signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by PackageInstallerActivity
 Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS.
 Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms.
 
-## Key Components in Android Application Installation
+## Key Components
 
-This section outlines the primary components involved in Android’s application installation process, The discussion focuses on system services, privileged apps, and client interactions, providing a general overview without referencing specific vendor implementations.
+This section outlines the primary components involved in Android’s application installation process. It focuses on system services, privileged apps, and client interactions, providing a general overview independent of any vendor-specific implementations.
 
 ### PackageInstallerService
 
@@ -47,7 +47,7 @@ The `PackageInstallerSession` class handles the active phase of an installation 
 - **`commit(statusReceiver, forTransferred)`**
 
   > Commit the session when all constraints are satisfied. This is a convenient method to combine waitForInstallConstraints(List, PackageInstaller. InstallConstraints, IntentSender, long) and PackageInstaller. Session. commit(IntentSender).
-  > Once this method is called, the session is sealed and no additional mutations may be performed on the session. In the case of timeout, you may commit the session again using this method or PackageInstaller. Session. commit(IntentSender) for retries.## PackageInstaller App
+  > Once this method is called, the session is sealed and no additional mutations may be performed on the session. In the case of timeout, you may commit the session again using this method or PackageInstaller. Session. commit(IntentSender) for retries.
 
 ### PackageInstaller
 
@@ -63,7 +63,7 @@ Client apps are non-privileged applications that initiate app installations. The
 
 ## Sideloading
 
-Android supports two methods for requesting application installation: `PIA` and `Session Install`. These are informal terms used within the AOSP codebase. In this post, `PIA` will be corresponds to application  `action android.intent.action.INSTALL_PACKAGE`, while `Session Install` is a newer API set introduced in Android L. `PIA` delegates most tasks to the `PackageInstaller` app, whereas `Session Install` offers apps finer control over the installation process. Additionally, only `Session Install` supports multi-package installations, sometimes called `splits`.
+Android supports two methods for requesting application installation: `PIA` and `Session Install`. These are informal terms used within the AOSP codebase. In this post, `PIA` reefers to the traditional app installation approach utilize the `android.intent.action.INSTALL_PACKAGE` action, while `Session Install` denotes a newer API set introduced in Android L. `PIA` delegates most tasks to the `PackageInstaller` app, whereas `Session Install` offers apps finer control over the installation process. Additionally, only `Session Install` supports multi-package installations, sometimes called `splits`.
 
 Since `PackageInstaller` internally uses `Session Install` to interact with `PackageInstallerSession` for installations triggered by `PIA`, I’ll discuss `Session Install` first.
 
@@ -172,7 +172,9 @@ The installation process involves the following steps:
      - Retrieving the resolved base apk file path (generated by `PackageInstallSession`) and passing it to the `PackageInstallerActivity`.
 
 4. User Confirmation:
-   The PackageInstallerActivity presents a confirmation dialog to the user. Upon approval, it launches the InstallInstalling activity.
+
+   The `PackageInstallerActivity` presents a confirmation dialog to the user. Once the user confirms the installation, control is passed to `InstallInstalling`, which handles the final phase of committing the session and completing the installation.
+   
 
 5. Completing the Installation:
    The `InstallInstalling` activity invokes `PackageInstallationSession.commit(IntentSender, forTransfer)` to finalize the installation.
@@ -209,3 +211,11 @@ The installation process involves the following steps:
         ...
      }
    ```
+
+## Conclusion
+
+Android’s sideloading process, whether `Session Install` or `PIA`, hinges on **strong user consent** in `PackageInstaller`, gated by the `INSTALL_PACKAGES` privilege permission, orchestrated by system services like `PackageInstallerService`, form a critical security barrier
+
+My experience with Samsung’s ISVP revealed a silent installation vulnerability that bypassed user interaction. Such exploitation patterns have significant real-world implications if adopted by threat actors. When OEMs modify AOSP code to serve commercial interests without sufficient security testing, the consequences can be severe. In these cases, collaboration with security researchers isn’t optional, it’s essential.
+
+Engage sincerely with white-hat researchers and honor your commitments, repeated disappointment and broken promises will ultimately erode your reputation.
