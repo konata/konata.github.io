@@ -30,24 +30,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Android application installation under the hood" />
+<meta property="og:title" content="Android’s Install Flow: A Treasure Map for Exploit Crafters" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting app installations without user consent. Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS. Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms." />
-<meta property="og:description" content="In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting app installations without user consent. Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS. Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms." />
+<meta name="description" content="In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by PackageInstallerActivity Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS. Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms." />
+<meta property="og:description" content="In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by PackageInstallerActivity Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS. Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms." />
 <link rel="canonical" href="http://localhost:4000/posts/android-application-installation/" />
 <meta property="og:url" content="http://localhost:4000/posts/android-application-installation/" />
 <meta property="og:site_name" content="开元米粉实力代购" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-05-20T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Android application installation under the hood" />
+<meta property="twitter:title" content="Android’s Install Flow: A Treasure Map for Exploit Crafters" />
 <meta name="twitter:site" content="@minamikazecafe" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-20T00:55:14+08:00","datePublished":"2025-05-20T00:00:00+08:00","description":"In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting app installations without user consent. Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS. Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms.","headline":"Android application installation under the hood","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/android-application-installation/"},"url":"http://localhost:4000/posts/android-application-installation/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-20T18:41:04+08:00","datePublished":"2025-05-20T00:00:00+08:00","description":"In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by PackageInstallerActivity Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS. Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms.","headline":"Android’s Install Flow: A Treasure Map for Exploit Crafters","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/android-application-installation/"},"url":"http://localhost:4000/posts/android-application-installation/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Android application installation under the hood | 开元米粉实力代购
+  <title>Android’s Install Flow: A Treasure Map for Exploit Crafters | 开元米粉实力代购
   </title>
 
   <!--
@@ -394,7 +394,7 @@
         
           
             
-              <span>Android application installation under the hood</span>
+              <span>Android’s Install Flow: A Treasure Map for Exploit Crafters</span>
             
 
           
@@ -581,6 +581,17 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -703,7 +714,7 @@
 
 <article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>Android application installation under the hood</h1>
+    <h1 data-toc-skip>Android’s Install Flow: A Treasure Map for Exploit Crafters</h1>
     
 
     <div class="post-meta text-muted">
@@ -745,7 +756,7 @@
 
 <time
   
-  data-ts="1747673714"
+  data-ts="1747737664"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -798,9 +809,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1604 words"
+  title="1732 words"
 >
-  <em>8 min</em> read</span>
+  <em>9 min</em> read</span>
 
         </div>
       </div>
@@ -809,7 +820,7 @@
 
   
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">Android application installation under the hood</span>
+      <span class="label text-truncate">Android’s Install Flow: A Treasure Map for Exploit Crafters</span>
       <button type="button" class="toc-trigger btn me-1">
         <i class="fa-solid fa-list-ul fa-fw"></i>
       </button>
@@ -822,7 +833,7 @@
 
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">Android application installation under the hood</div>
+        <div class="label text-truncate py-2 ms-4">Android’s Install Flow: A Treasure Map for Exploit Crafters</div>
         <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
@@ -832,13 +843,13 @@
   
 
   <div class="content">
-    <p>In my previous post, <a href="/posts/samsung-bugbounty-scam">Samsung’s ISVP: Betraying the Trust of Security Researchers</a>, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the <a href="https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/res/AndroidManifest.xml;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=6054"><code class="language-plaintext highlighter-rouge">android.permission.INSTALL_PACKAGES</code></a> signature permission, permitting app installations without user consent.
+    <p>In my previous post, <a href="/posts/samsung-bugbounty-scam">Samsung’s ISVP: Betraying the Trust of Security Researchers</a>, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the <a href="https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/res/AndroidManifest.xml;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=6054"><code class="language-plaintext highlighter-rouge">android.permission.INSTALL_PACKAGES</code></a> signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by PackageInstallerActivity
 Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS.
 Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms.</p>
 
-<h2 id="key-components-in-android-application-installation"><span class="me-2">Key Components in Android Application Installation</span><a href="#key-components-in-android-application-installation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="key-components"><span class="me-2">Key Components</span><a href="#key-components" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>This section outlines the primary components involved in Android’s application installation process, The discussion focuses on system services, privileged apps, and client interactions, providing a general overview without referencing specific vendor implementations.</p>
+<p>This section outlines the primary components involved in Android’s application installation process. It focuses on system services, privileged apps, and client interactions, providing a general overview independent of any vendor-specific implementations.</p>
 
 <h3 id="packageinstallerservice"><span class="me-2">PackageInstallerService</span><a href="#packageinstallerservice" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
@@ -895,7 +906,7 @@ You can write data into the returned stream, optionally call fsync(OutputStream)
 
     <blockquote>
       <p>Commit the session when all constraints are satisfied. This is a convenient method to combine waitForInstallConstraints(List, PackageInstaller. InstallConstraints, IntentSender, long) and PackageInstaller. Session. commit(IntentSender).
-Once this method is called, the session is sealed and no additional mutations may be performed on the session. In the case of timeout, you may commit the session again using this method or PackageInstaller. Session. commit(IntentSender) for retries.## PackageInstaller App</p>
+Once this method is called, the session is sealed and no additional mutations may be performed on the session. In the case of timeout, you may commit the session again using this method or PackageInstaller. Session. commit(IntentSender) for retries.</p>
     </blockquote>
   </li>
 </ul>
@@ -914,7 +925,7 @@ Once this method is called, the session is sealed and no additional mutations ma
 
 <h2 id="sideloading"><span class="me-2">Sideloading</span><a href="#sideloading" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<p>Android supports two methods for requesting application installation: <code class="language-plaintext highlighter-rouge">PIA</code> and <code class="language-plaintext highlighter-rouge">Session Install</code>. These are informal terms used within the AOSP codebase. In this post, <code class="language-plaintext highlighter-rouge">PIA</code> will be corresponds to application  <code class="language-plaintext highlighter-rouge">action android.intent.action.INSTALL_PACKAGE</code>, while <code class="language-plaintext highlighter-rouge">Session Install</code> is a newer API set introduced in Android L. <code class="language-plaintext highlighter-rouge">PIA</code> delegates most tasks to the <code class="language-plaintext highlighter-rouge">PackageInstaller</code> app, whereas <code class="language-plaintext highlighter-rouge">Session Install</code> offers apps finer control over the installation process. Additionally, only <code class="language-plaintext highlighter-rouge">Session Install</code> supports multi-package installations, sometimes called <code class="language-plaintext highlighter-rouge">splits</code>.</p>
+<p>Android supports two methods for requesting application installation: <code class="language-plaintext highlighter-rouge">PIA</code> and <code class="language-plaintext highlighter-rouge">Session Install</code>. These are informal terms used within the AOSP codebase. In this post, <code class="language-plaintext highlighter-rouge">PIA</code> reefers to the traditional app installation approach utilize the <code class="language-plaintext highlighter-rouge">android.intent.action.INSTALL_PACKAGE</code> action, while <code class="language-plaintext highlighter-rouge">Session Install</code> denotes a newer API set introduced in Android L. <code class="language-plaintext highlighter-rouge">PIA</code> delegates most tasks to the <code class="language-plaintext highlighter-rouge">PackageInstaller</code> app, whereas <code class="language-plaintext highlighter-rouge">Session Install</code> offers apps finer control over the installation process. Additionally, only <code class="language-plaintext highlighter-rouge">Session Install</code> supports multi-package installations, sometimes called <code class="language-plaintext highlighter-rouge">splits</code>.</p>
 
 <p>Since <code class="language-plaintext highlighter-rouge">PackageInstaller</code> internally uses <code class="language-plaintext highlighter-rouge">Session Install</code> to interact with <code class="language-plaintext highlighter-rouge">PackageInstallerSession</code> for installations triggered by <code class="language-plaintext highlighter-rouge">PIA</code>, I’ll discuss <code class="language-plaintext highlighter-rouge">Session Install</code> first.</p>
 
@@ -1099,8 +1110,9 @@ Once this method is called, the session is sealed and no additional mutations ma
     </ul>
   </li>
   <li>
-    <p>User Confirmation:
-The PackageInstallerActivity presents a confirmation dialog to the user. Upon approval, it launches the InstallInstalling activity.</p>
+    <p>User Confirmation:</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">PackageInstallerActivity</code> presents a confirmation dialog to the user. Once the user confirms the installation, control is passed to <code class="language-plaintext highlighter-rouge">InstallInstalling</code>, which handles the final phase of committing the session and completing the installation.</p>
   </li>
   <li>
     <p>Completing the Installation:
@@ -1171,6 +1183,14 @@ Unlike a standard session-based installation, this session is created and commit
   </li>
 </ol>
 
+<h2 id="conclusion"><span class="me-2">Conclusion</span><a href="#conclusion" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Android’s sideloading process, whether <code class="language-plaintext highlighter-rouge">Session Install</code> or <code class="language-plaintext highlighter-rouge">PIA</code>, hinges on <strong>strong user consent</strong> in <code class="language-plaintext highlighter-rouge">PackageInstaller</code>, gated by the <code class="language-plaintext highlighter-rouge">INSTALL_PACKAGES</code> privilege permission, orchestrated by system services like <code class="language-plaintext highlighter-rouge">PackageInstallerService</code>, form a critical security barrier</p>
+
+<p>My experience with Samsung’s ISVP revealed a silent installation vulnerability that bypassed user interaction. Such exploitation patterns have significant real-world implications if adopted by threat actors. When OEMs modify AOSP code to serve commercial interests without sufficient security testing, the consequences can be severe. In these cases, collaboration with security researchers isn’t optional, it’s essential.</p>
+
+<p>Engage sincerely with white-hat researchers and honor your commitments, repeated disappointment and broken promises will ultimately erode your reputation.</p>
+
   </div>
 
   <div class="post-tail-wrapper text-muted">
@@ -1211,14 +1231,14 @@ Unlike a standard session-based installation, this session is created and commit
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=Android%20application%20installation%20under%20the%20hood%20-%20%E5%BC%80%E5%85%83%E7%B1%B3%E7%B2%89%E5%AE%9E%E5%8A%9B%E4%BB%A3%E8%B4%AD&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fandroid-application-installation%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=Android%E2%80%99s%20Install%20Flow:%20A%20Treasure%20Map%20for%20Exploit%20Crafters%20-%20%E5%BC%80%E5%85%83%E7%B1%B3%E7%B2%89%E5%AE%9E%E5%8A%9B%E4%BB%A3%E8%B4%AD&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fandroid-application-installation%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fab fa-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fandroid-application-installation%2F&text=Android%20application%20installation%20under%20the%20hood%20-%20%E5%BC%80%E5%85%83%E7%B1%B3%E7%B2%89%E5%AE%9E%E5%8A%9B%E4%BB%A3%E8%B4%AD" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2Fandroid-application-installation%2F&text=Android%E2%80%99s%20Install%20Flow:%20A%20Treasure%20Map%20for%20Exploit%20Crafters%20-%20%E5%BC%80%E5%85%83%E7%B1%B3%E7%B2%89%E5%AE%9E%E5%8A%9B%E4%BB%A3%E8%B4%AD" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -1273,7 +1293,7 @@ Unlike a standard session-based installation, this session is created and commit
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/android-application-installation/">Android application installation under the hood</a>
+          <a href="/posts/android-application-installation/">Android’s Install Flow: A Treasure Map for Exploit Crafters</a>
         </li>
       
         

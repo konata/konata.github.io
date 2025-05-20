@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>开元米粉实力代购</title>
   <subtitle></subtitle>
-  <updated>2025-05-20T18:40:32+08:00</updated>
+  <updated>2025-05-20T20:49:03+08:00</updated>
   <author>
     <name>natsuki</name>
     <uri>http://localhost:4000/</uri>
@@ -20,11 +20,11 @@
 
   
   <entry>
-    <title>Android application installation under the hood</title>
-    <link href="http://localhost:4000/posts/android-application-installation/" rel="alternate" type="text/html" title="Android application installation under the hood" />
+    <title>Android’s Install Flow: A Treasure Map for Exploit Crafters</title>
+    <link href="http://localhost:4000/posts/android-application-installation/" rel="alternate" type="text/html" title="Android’s Install Flow: A Treasure Map for Exploit Crafters" />
     <published>2025-05-20T00:00:00+08:00</published>
   
-    <updated>2025-05-20T00:55:14+08:00</updated>
+    <updated>2025-05-20T18:41:04+08:00</updated>
   
     <id>http://localhost:4000/posts/android-application-installation/</id>
     <content type="text/html" src="http://localhost:4000/posts/android-application-installation/" />
@@ -36,7 +36,7 @@
     
   
 
-  <summary>In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting app installations without user consent. Despite Samsung’s ISVP policy specifying...</summary>
+  <summary>In my previous post, Samsung’s ISVP: Betraying the Trust of Security Researchers, I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the android.permission.INSTALL_PACKAGES signature permission, permitting silent application installations, bypassing the user confirmation dialog normall...</summary>
 
   </entry>
 
