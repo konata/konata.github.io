@@ -5,8 +5,12 @@ published: true
 date: 2025-05-20
 ---
 
-In my previous post, [Samsung’s ISVP: Betraying the Trust of Security Researchers](/posts/samsung-bugbounty-scam), I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. This flaw allowed non-privileged apps to bypass the [`android.permission.INSTALL_PACKAGES`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/res/AndroidManifest.xml;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=6054) signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by PackageInstallerActivity
+In my previous post, [Samsung’s ISVP: Betraying the Trust of Security Researchers](/posts/samsung-bugbounty-scam), I shared my experience uncovering a vulnerability in Samsung mobile devices that enabled silent app installation. 
+
+This flaw allowed non-privileged apps to bypass the [`android.permission.INSTALL_PACKAGES`](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/res/AndroidManifest.xml;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=6054) signature permission, permitting silent application installations, bypassing the user confirmation dialog normally enforced by `PackageInstallerActivity`
+
 Despite Samsung’s ISVP policy specifying a $50,000 reward for such vulnerabilities, I received only $500, and my follow-up inquiries were ignored. While some recommended publicly disclosing the vulnerability details, doing so would breach the program’s ToS.
+
 Instead, this post examines the general Android app installation process, drawing on publicly available code from AOSP android-15.0.0_r1. The discussion is not specific to Samsung devices or the vulnerability I reported, focusing solely on open-source mechanisms.
 
 ## Key Components
@@ -55,7 +59,7 @@ The `PackageInstaller` system app (`com.android.packageinstaller`) facilitates s
 
 ### OEM Privileged App Stores
 
-Although not the focus of this post, OEM app stores (such as Google Play, Samsung Galaxy Store, Huawei AppGallery, and Oppo/Vivo/Xiaomi stores) typically hold the `INSTALL_PACKAGES` permission. These stores are common entry points for installing third-party applications, often referred to as app store installations, in contrast to sideloading like PIA or Session Install.
+Although not the focus of this post, OEM app stores (such as Google Play, Samsung Galaxy Store, Huawei AppGallery, and Oppo/Vivo/Xiaomi stores) typically hold the `INSTALL_PACKAGES` permission. These stores are common entry points for installing third-party applications, often referred to as app store installations, in contrast to sideloading like `PIA` or `Session Install`.
 
 ### Client Applications
 
@@ -63,7 +67,7 @@ Client apps are non-privileged applications that initiate app installations. The
 
 ## Sideloading
 
-Android supports two methods for requesting application installation: `PIA` and `Session Install`. These are informal terms used within the AOSP codebase. In this post, `PIA` reefers to the traditional app installation approach utilize the `android.intent.action.INSTALL_PACKAGE` action, while `Session Install` denotes a newer API set introduced in Android L. `PIA` delegates most tasks to the `PackageInstaller` app, whereas `Session Install` offers apps finer control over the installation process. Additionally, only `Session Install` supports multi-package installations, sometimes called `splits`.
+Android supports two methods for requesting application installation: `PIA` and `Session Install`. These are informal terms used within the AOSP codebase. In this post, `PIA` refers to the traditional app installation approach utilize the `android.intent.action.INSTALL_PACKAGE` action, while `Session Install` denotes a newer API set introduced in Android L. `PIA` delegates most tasks to the `PackageInstaller` app, whereas `Session Install` offers apps finer control over the installation process. Additionally, only `Session Install` supports multi-package installations, sometimes called `splits`.
 
 Since `PackageInstaller` internally uses `Session Install` to interact with `PackageInstallerSession` for installations triggered by `PIA`, I’ll discuss `Session Install` first.
 
@@ -115,11 +119,11 @@ This code initiates a session, writes the apk content, and commits the session. 
   </activity>
   ```
 
-  InstallStart activity performs initial validation checks and delegates the remaining process to `PackageInstallerActivity`.
+  `InstallStart` activity performs initial validation checks and delegates the remaining process to `PackageInstallerActivity`.
 
   - **PackageInstallerActivity**
 
-    The PackageInstallerActivity retrieves session details committed by the client app using `PackageInstaller.getSessionInfo(sessionId)`. It accesses the apk file stored by PackageInstallerService, typically located at `/data/app/vmdl${random-digital}.tmp/base.apk`. The activity parses the apk to extract metadata, such as the application’s icon and name, and displays a dialog prompting the user to confirm or cancel the installation.
+    The `PackageInstallerActivity` retrieves session details committed by the client app using `PackageInstaller.getSessionInfo(sessionId)`. It accesses the apk file saved by `PackageInstallerService`, typically located at `/data/app/vmdl${random-digital}.tmp/base.apk`. The activity parses the apk to extract metadata, such as the application’s icon and name, and displays a dialog prompting the user to confirm or cancel the installation.
     ![user-approval-dialog](/assets/images/android-application-installation/user-approval-dialog.png),
 
     ```
@@ -137,7 +141,7 @@ This code initiates a session, writes the apk content, and commits the session. 
 
 While google is refactoring the process and UI, guarded by the [pia_v2](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/content/pm/flags.aconfig;drc=82ada6503a81af7eeed2924a2d2d942375f6c8c2;l=109) flag, but this is not yet enabled. This discussion focuses on the traditional installation process.
 
-Internally, `PIA` functions similarly to a session-based installation but offers developers a simpler and more convenient API. `PackageInstaller` handles most tasks for the client app, including creating the session, copying the APK stream to the session, and committing the session.
+Internally, `PIA` functions similarly to a session-based installation but offers developers a simpler and more convenient API. `PackageInstaller` handles most tasks for the client app, including creating the session, copying the apk stream to the session, and committing the session.
 
 The installation process involves the following steps:
 
