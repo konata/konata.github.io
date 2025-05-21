@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Android’s Install Flow: A Treasure Map for Exploit Crafters'
+title: 'Android’s Install Flow: A treasure map for exploit crafters'
 published: true
 date: 2025-05-20
 ---
